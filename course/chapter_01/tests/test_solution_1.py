@@ -14,7 +14,3 @@ def test_import_module():
     assert isinstance(age, int), "Variable age has not integer type"
     assert isinstance(is_student, bool), "Variable is_student has not bool type"
     assert isinstance(name, str), "Variable name has not string type"
-
-
-
-    
