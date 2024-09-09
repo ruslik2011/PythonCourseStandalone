@@ -53,26 +53,46 @@ def solution_runner(request):
         pytest.fail("Solution not exist")
     try:
         inputed_values, timeout = marker.args
-        if isinstance(inputed_values[0], str):
-            inputed_values = map(lambda x: x + "\n", inputed_values)
+        if isinstance(inputed_values, str):
+            vals = inputed_values + "\n"
             p = Popen(
                 ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
             )
-            p.stdin.writelines(inputed_values)
+            p.stdin.writelines(vals)
             p.stdin.close()
             p.wait(timeout=timeout)
             result = p.stdout.read()
-        elif isinstance(inputed_values[0], tuple):
-            for vals in inputed_values:
-                vals = map(lambda x: x + "\n", vals)
-                p = Popen(
-                    ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
-                )
-                p.stdin.writelines(vals)
-                p.stdin.close()
-                p.wait(timeout=timeout) 
-                result.append(p.stdout.read())         
+        elif isinstance(inputed_values, tuple):
+            vals = map(lambda x: x + "\n", inputed_values)
+            p = Popen(
+                ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
+            )
+            p.stdin.writelines(vals)
+            p.stdin.close()
+            p.wait(timeout=timeout)
+            result = p.stdout.read()
+        elif isinstance(inputed_values, list):
+            if isinstance(inputed_values[0], tuple):
+                for vals in inputed_values:
+                    vals = map(lambda x: x + "\n", vals)
+                    p = Popen(
+                        ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
+                    )
+                    p.stdin.writelines(vals)
+                    p.stdin.close()
+                    p.wait(timeout=timeout) 
+                    result.append(p.stdout.read())
+            elif isinstance(inputed_values[0], str):
+                for vals in inputed_values:
+                    vals += "\n"
+                    p = Popen(
+                        ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
+                    )
+                    p.stdin.writelines(vals)
+                    p.stdin.close()
+                    p.wait(timeout=timeout) 
+                    result.append(p.stdout.read())
     except TimeoutExpired:
         pytest.fail("Programm not terminate in timeout")
-
+    
     return result
