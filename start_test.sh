@@ -19,8 +19,8 @@ if [ "$#" -eq 2 ]; then
 
     TEST_CLASS="TestChatper$(printf "%02d" $CHAPTER_NUM)ex$(printf "%02d" $EXERCISE_NUM)"
 
-    python3 -m pytest -v "$TEST_FILE"::"$TEST_CLASS"
+    python3 -m pytest -vv "$TEST_FILE"::"$TEST_CLASS"
 else
 
-    python3 -m pytest -v "$TEST_FILE"
+    python3 -m pytest -vv "$TEST_FILE"
 fi
