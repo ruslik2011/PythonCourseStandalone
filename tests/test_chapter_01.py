@@ -132,6 +132,7 @@ class TestChapter01ex07:
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
 
+
 class TestChapter01ex08:
     @pytest.mark.solution_runner(("4", "4"), 0.1)
     def test_solution_08_output(self, solution_runner):
@@ -140,7 +141,7 @@ class TestChapter01ex08:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
+
     @pytest.mark.xfail
     @pytest.mark.solution_runner(("4.5", "4.5"), 0.1)
     def test_solution_08_typing(self, solution_runner):
@@ -149,7 +150,8 @@ class TestChapter01ex08:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
+
+
 class TestChapter01ex09:
     @pytest.mark.solution_runner(("6.0", "4.0"), 0.1)
     def test_solution_09_output(self, solution_runner):
@@ -158,7 +160,7 @@ class TestChapter01ex09:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
+
 
 class TestChapter01ex10:
     @pytest.mark.solution_runner("15", 0.1)
@@ -168,15 +170,16 @@ class TestChapter01ex10:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
-        
+
+
 class TestChapter01ex11:
-    @pytest.mark.solution_runner([
-                                  ("14", "3"),
-                                  ("16", "4"),
-                                  ],
-                                 0.1)
-    
+    @pytest.mark.solution_runner(
+        [
+            ("14", "3"),
+            ("16", "4"),
+        ],
+        0.1,
+    )
     def test_solution_11_output_1(self, solution_runner):
         solution_out = solution_runner
         expected_output = ["2\n", "0\n"]
@@ -193,20 +196,13 @@ class TestChapter01ex11:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
-        
+
+
 class TestChapter01ex12:
-    @pytest.mark.solution_runner([
-        ("3", "3"),
-        ("4", "4")
-        ],
-        0.1)
+    @pytest.mark.solution_runner([("3", "3"), ("4", "4")], 0.1)
     def test_solution_12_output(self, solution_runner):
         solution_out = solution_runner
-        expected_output = [
-            "27\n",
-            "256\n"
-        ]
+        expected_output = ["27\n", "256\n"]
         for expected, solution in zip(expected_output, solution_out):
             assert (
                 expected == solution
@@ -223,14 +219,15 @@ class TestChapter01ex13:
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
 
     @pytest.mark.xfail
-    @pytest.mark.solution_runner("50.0" , 0.1)
+    @pytest.mark.solution_runner("50.0", 0.1)
     def test_solution_13_typing(self, solution_runner):
         solution_out = solution_runner
         expected_output = "60.0"
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
+
+
 class TestChapter01ex14:
     @pytest.mark.solution_runner("Tony", 0.1)
     def test_solution_14_output(self, solution_runner):
@@ -240,13 +237,14 @@ class TestChapter01ex14:
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
 
+
 class TestChapter01ex15:
-    def pine(self, char:str):
-        peek = [' ' * (5 - i) + char * (i * 2 + 1) for i in range(3)]
-        middle = [' ' * (4 - i) + char * (i * 2 + 3) for i in range(4)]
-        bottom = [' ' * (3 - i) + char * (i * 2 + 5) for i in range(4)]
-        return '\n'.join(peek + middle + bottom) + '\n'
-    
+    def pine(self, char: str):
+        peek = [" " * (5 - i) + char * (i * 2 + 1) for i in range(3)]
+        middle = [" " * (4 - i) + char * (i * 2 + 3) for i in range(4)]
+        bottom = [" " * (3 - i) + char * (i * 2 + 5) for i in range(4)]
+        return "\n".join(peek + middle + bottom) + "\n"
+
     @pytest.mark.solution_runner("+", 0.1)
     def test_solution_15_output_1(self, solution_runner):
         solution_out = solution_runner
@@ -254,7 +252,7 @@ class TestChapter01ex15:
         assert (
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
-        
+
     @pytest.mark.solution_runner("y", 0.1)
     def test_solution_15_output_2(self, solution_runner):
         solution_out = solution_runner
@@ -263,21 +261,19 @@ class TestChapter01ex15:
             solution_out == expected_output
         ), f"expected output is `{expected_output}` \n Your program gives `{solution_out}`"
 
+
 class TestChapter01ex16:
     @pytest.mark.solution_runner(
         [
             "12.234",
             "12.999",
-        ], 
-        0.1
-        )
+        ],
+        0.1,
+    )
     def test_solution_16_output(self, solution_runner):
         solution_out = solution_runner
-        expected_output = [
-            "12.0\n",
-            "12.0\n"
-        ]
-                           
+        expected_output = ["12.0\n", "12.0\n"]
+
         for expected, solution in zip(expected_output, solution_out):
             assert (
                 expected == solution
@@ -287,10 +283,11 @@ class TestChapter01ex16:
 class TestChapter01ex17:
     @pytest.mark.solution_runner(
         [
-        ("2", "3", "4"),
-        ("5", "3.23", "5"),
+            ("2", "3", "4"),
+            ("5", "3.23", "5"),
         ],
-        0.1)
+        0.1,
+    )
     def test_solution_17_int_input(self, solution_runner):
         solution_out = [float(i) for i in solution_runner]
         expected_output = (3.0, 4.41)
@@ -299,18 +296,15 @@ class TestChapter01ex17:
                 expected == solution
             ), f"expected output is `{expected}` \n Your program gives `{solution}`"
 
+
 class TestChapter01ex18:
-    @pytest.mark.solution_runner(
-        [
-        ("21", "3"),
-        ("1345", "10")
-        ],
-        0.1)
+    @pytest.mark.solution_runner([("21", "3"), ("1345", "10")], 0.1)
     def test_solution_18_output_1(self, solution_runner):
         solution_out = solution_runner
-        expected_output = (f"Яблок у каждого из 3 друзей: 7\nЯблок в корзине: 0\n",
-                           f"Яблок у каждого из 10 друзей: 134\nЯблок в корзине: 5\n"
-                          )
+        expected_output = (
+            f"Яблок у каждого из 3 друзей: 7\nЯблок в корзине: 0\n",
+            f"Яблок у каждого из 10 друзей: 134\nЯблок в корзине: 5\n",
+        )
         for expected, solution in zip(expected_output, solution_out):
             assert (
                 expected == solution

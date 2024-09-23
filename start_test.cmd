@@ -5,12 +5,12 @@ if "%~1"=="" (
     exit /b 1
 )
 
-set CHAPTER_NUM=%1
+
+set /A CHAPTER_NUM=%1
+set /A TEN=10
 REM Construct the test file name based on the chapter number
-set TEST_FILE=tests\test_chapter_%CHAPTER_NUM%
-if %CHAPTER_NUM% LSS 10 (
-    set TEST_FILE=tests\test_chapter_0%CHAPTER_NUM%
-)
+
+if %CHAPTER_NUM% LSS %TEN% (set TEST_FILE=tests\test_chapter_0%CHAPTER_NUM%) ELSE (set TEST_FILE=tests\test_chapter_%CHAPTER_NUM%)
 
 REM Check if the test file exists
 if not exist "%TEST_FILE%.py" (
@@ -18,20 +18,12 @@ if not exist "%TEST_FILE%.py" (
     exit /b 1
 )
 
-REM If the second argument (exercise number) is provided
-if not "%~2"=="" (
-    set EXERCISE_NUM=%2
-    REM Construct the test class name based on the exercise number
-    set TEST_CLASS=TestChatper%CHAPTER_NUM%ex%EXERCISE_NUM%
-    if %CHAPTER_NUM% LSS 10 (
-        set TEST_CLASS=TestChatper0%CHAPTER_NUM%ex%EXERCISE_NUM%
-    )
-    if %EXERCISE_NUM% LSS 10 (
-        set TEST_CLASS=TestChatper%CHAPTER_NUM%ex0%EXERCISE_NUM%
-    )
-    REM Run only the specified test class in verbose mode
-    python -m pytest -v "%TEST_FILE%.py"::"%TEST_CLASS%"
-) else (
-    REM If no exercise number is provided, run all tests in the chapter
-    python -m pytest -v "%TEST_FILE%.py"::"%TEST_CLASS%"
-)
+if "%~2"==""  (
+    python -m pytest -v "%TEST_FILE%.py"
+	exit /b 0
+) 
+set/A EXERCISE_NUM=%2
+if %EXERCISE_NUM% LSS %TEN% (set "EXERCISE=0%EXERCISE_NUM%") 
+if %CHAPTER_NUM% LSS %TEN% (set "CHAPTER=0%CHAPTER_NUM%") 
+set "TEST_CLASS=TestChapter%CHAPTER%ex%EXERCISE%"
+python -m pytest -v "%TEST_FILE%.py::%TEST_CLASS%"

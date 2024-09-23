@@ -17,7 +17,7 @@ fi
 if [ "$#" -eq 2 ]; then
     EXERCISE_NUM=$2
 
-    TEST_CLASS="TestChatper$(printf "%02d" $CHAPTER_NUM)ex$(printf "%02d" $EXERCISE_NUM)"
+    TEST_CLASS="TestChapter$(printf "%02d" $CHAPTER_NUM)ex$(printf "%02d" $EXERCISE_NUM)"
 
     python3 -m pytest -vv "$TEST_FILE"::"$TEST_CLASS"
 else

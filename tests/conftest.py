@@ -37,6 +37,7 @@ from subprocess import Popen, PIPE, STDOUT, TimeoutExpired
 #     result = p.stdout.read()
 #     return result
 
+
 @pytest.fixture()
 def solution_runner(request):
     marker = request.node.get_closest_marker("solution_runner")
@@ -76,23 +77,31 @@ def solution_runner(request):
                 for vals in inputed_values:
                     vals = map(lambda x: x + "\n", vals)
                     p = Popen(
-                        ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
+                        ["python3", file_path],
+                        stdout=PIPE,
+                        stdin=PIPE,
+                        stderr=PIPE,
+                        text=True,
                     )
                     p.stdin.writelines(vals)
                     p.stdin.close()
-                    p.wait(timeout=timeout) 
+                    p.wait(timeout=timeout)
                     result.append(p.stdout.read())
             elif isinstance(inputed_values[0], str):
                 for vals in inputed_values:
                     vals += "\n"
                     p = Popen(
-                        ["python3", file_path], stdout=PIPE, stdin=PIPE, stderr=PIPE, text=True
+                        ["python3", file_path],
+                        stdout=PIPE,
+                        stdin=PIPE,
+                        stderr=PIPE,
+                        text=True,
                     )
                     p.stdin.writelines(vals)
                     p.stdin.close()
-                    p.wait(timeout=timeout) 
+                    p.wait(timeout=timeout)
                     result.append(p.stdout.read())
     except TimeoutExpired:
         pytest.fail("Programm not terminate in timeout")
-    
+
     return result
