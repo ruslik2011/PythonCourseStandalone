@@ -162,5 +162,4 @@ cython_debug/
 #.idea/
 
 # My_solutions
-solution_*.py
 .vscode
