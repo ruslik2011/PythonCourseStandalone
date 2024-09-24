@@ -14,7 +14,7 @@ class TestChapter07ex01:
         with open("course/chapter_07/solutions/solution_1.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -23,6 +23,8 @@ class TestChapter07ex01:
                         assert values == [10, 20, 30, 40, 50], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
@@ -40,7 +42,7 @@ class TestChapter07ex02:
         with open("course/chapter_07/solutions/solution_2.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -49,6 +51,8 @@ class TestChapter07ex02:
                         assert values == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
@@ -67,7 +71,7 @@ class TestChapter07ex03:
         with open("course/chapter_07/solutions/solution_3.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -76,6 +80,8 @@ class TestChapter07ex03:
                         assert values == [3, 17, 6, 12, 9, 21, 5], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
@@ -103,7 +109,7 @@ class TestChapter07ex05:
         with open("course/chapter_07/solutions/solution_5.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -112,6 +118,8 @@ class TestChapter07ex05:
                         assert values == [4, 7, 2, 9, 8, 5, 6, 3, 0, 1], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
@@ -128,7 +136,7 @@ class TestChapter07ex06:
         with open("course/chapter_07/solutions/solution_6.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -137,6 +145,8 @@ class TestChapter07ex06:
                         assert values == [10, 20, 30, 40, 50], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
@@ -155,7 +165,7 @@ class TestChapter07ex07:
         with open("course/chapter_07/solutions/solution_7.py", "r") as file:
             tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            number = False
+            numbers = False
             if isinstance(node, ast.Assign):
                 for target in node.targets:
                     if isinstance(target, ast.Name) and target.id == "numbers":
@@ -164,6 +174,8 @@ class TestChapter07ex07:
                         assert values == [5, 10, 15, 20, 25, 30, 35, 40], "Неверные значения в numbers"
                         numbers = True
                         break
+            if numbers:
+                break
         else:
             if not numbers:
                 pytest.fail("Переменная 'numbers' не найдена")
